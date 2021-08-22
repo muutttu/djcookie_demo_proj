@@ -42,7 +42,7 @@ const useStyles = makeStyles(() => createStyles({
 
 const Navbar = () => {
   const classes = useStyles();
-  const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
+  //const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 
   return (
     <nav>
