@@ -3,10 +3,9 @@ import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles(() => createStyles({
   root: {
-    display: 'flex',
-    flexGrow: 1,
+
   },
-  gridcontainer: {
+  headercontainer: {
     justifyContent: 'center',
   },
 }));
@@ -17,7 +16,7 @@ const Header = () => {
   return (
     <header>
       <div className={classes.root}>
-        <Grid container className={classes.gridcontainer}>
+        <Grid container className={classes.headercontainer}>
           <Grid item>
             <h1>Otsikko</h1>
           </Grid>

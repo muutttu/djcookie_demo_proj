@@ -3,8 +3,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 const useStyles = makeStyles(() => createStyles({
   root: {
-    display: 'flex',
-    flexGrow: 1,
+
   },
   stickToBottom: {
     width: '100%',

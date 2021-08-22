@@ -1,31 +1,73 @@
 import { makeStyles, createStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import { Link as RouterLink } from "react-router-dom";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Box,
+  Button,
+  Link,
+  IconButton
+} from '@material-ui/core';
+import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles(() => createStyles({
   root: {
     display: 'flex',
-    flexGrow: 1,
   },
-  title: {
-    flexGrow: 1,
+  menuButton: {
+
   },
+  logotitle: {
+  },
+  logolink: {
+    color: 'inherit',
+  },
+  navleft: {
+    flexGrow: 1,
+    flexWrap: 'nowrap',
+    color: 'inherit',
+  },
+  navcenter: {
+    flexGrow: 1,
+    color: 'inherit',
+  },
+  navright: {
+    color: 'inherit',
+  },
+  navlink: {
+    color: 'inherit',
+  }
 }));
 
 const Navbar = () => {
   const classes = useStyles();
+  const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
 
   return (
     <nav>
       <div className={classes.root}>
         <AppBar position='static'>
           <Toolbar>
-            <Typography variant='h6' className={classes.title}>
-              Logo
+          <Box className={classes.navleft}>
+            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+              <MenuIcon />
+            </IconButton>
+            <Typography variant='h6' className={classes.logotitle}>
+              <Link className={classes.logolink} component={RouterLink} to='/'>
+                Logo
+              </Link>
             </Typography>
-            <Button color='inherit'>Login</Button>
+            </Box>
+            <Box className={classes.navcenter}>
+              <Link className={classes.navlink} component={RouterLink} to='/users'>
+                Alasivu1
+              </Link>
+            </Box>
+            <Box className={classes.navright}>
+              <Button color='inherit'>Rekisteröidy</Button>
+              <Button color='inherit'>Kirjaudu</Button>
+            </Box>
           </Toolbar>
         </AppBar>
       </div>
