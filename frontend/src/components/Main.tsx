@@ -4,25 +4,21 @@ import { Switch, Route } from "react-router-dom";
 import Home from '../components/Home'
 import Users from '../components/Users';
 import NotFound404 from '../common/NotFound404';
-import { Grid, Container } from '@material-ui/core';
+import { Container } from '@material-ui/core';
 
-const useStyles = makeStyles(() => createStyles({
-  root: {
-
+const useStyles = makeStyles({
+  /* Page custom CSS here */
+  mainRoot: {
+    /* Main root element custom css here */
   },
-  maincontainer: {
-    justifyContent: 'center',
-  },
-}));
+});
 
 const Main = () => {
   const classes = useStyles();
 
   return (
     <main>
-      <div className={classes.root}>
-        <Grid container>
-        <Container className={classes.maincontainer}>
+        <Container className={classes.mainRoot}>
           <Switch>
             <Route exact path="/">
               <Home />
@@ -35,8 +31,6 @@ const Main = () => {
             </Route>
           </Switch>
         </Container>
-        </Grid>
-      </div>
     </main>
   )
 }

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Grid, Typography } from '@material-ui/core';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -75,7 +75,7 @@ const Users = () => {
   }, []);
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Grid container className={classes.maincontainer}>
         <Grid item className={classes.pageheader}>
           <h2>Aktiiviset käyttäjät</h2>
@@ -110,7 +110,7 @@ const Users = () => {
           </Table>
         </TableContainer>
       </Grid>
-    </div>
+    </Box>
   )
 }
 

@@ -1,76 +1,68 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
+import React from 'react';
+import { makeStyles } from '@material-ui/core';
 import { Link as RouterLink } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
   Typography,
   Box,
+  Tabs,
+  Tab,
+  ButtonGroup,
   Button,
-  Link,
   IconButton
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 
-const useStyles = makeStyles(() => createStyles({
-  root: {
+function tabProps(index: any) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles({
+  /* Page custom CSS here */
+  navRoot: {
+    /* Navigation bar root element custom css here */
     display: 'flex',
   },
-  menuButton: {
-
-  },
-  logotitle: {
-  },
-  logolink: {
-    color: 'inherit',
-  },
-  navleft: {
+  navLinks: {
     flexGrow: 1,
-    flexWrap: 'nowrap',
-    color: 'inherit',
-  },
-  navcenter: {
-    flexGrow: 1,
-    color: 'inherit',
-  },
-  navright: {
-    color: 'inherit',
-  },
-  navlink: {
-    color: 'inherit',
   }
-}));
+});
 
 const Navbar = () => {
   const classes = useStyles();
   //const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
+  const [value, setValue] = React.useState(0);
+  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+    setValue(newValue);
+  };
 
   return (
     <nav>
-      <div className={classes.root}>
+      <Box className={classes.navRoot}>
         <AppBar position='static'>
           <Toolbar>
-          <Box className={classes.navleft}>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+            <IconButton edge='start' color='inherit' aria-label='menu'>
               <MenuIcon />
             </IconButton>
-            <Typography variant='h6' className={classes.logotitle}>
-              <Link className={classes.logolink} component={RouterLink} to='/'>
-                Logo
-              </Link>
+            <Typography variant='h6'>
+              Logo
             </Typography>
-            </Box>
-            <Box className={classes.navcenter}>
-              <Link className={classes.navlink} component={RouterLink} to='/users'>
-                Alasivu1
-              </Link>
-            </Box>
-            <Box className={classes.navright}>
+            <Tabs centered value={value} onChange={handleChange} aria-label='simple tabs' className={classes.navLinks}>
+              <Tab label='Koti' component={RouterLink} to='/' {...tabProps(0)} />
+              <Tab label='Käyttäjät' component={RouterLink} to='/users' {...tabProps(1)} />
+              <Tab label='Alasivu 2' disabled component={RouterLink} to='#' {...tabProps(2)} />
+            </Tabs>
+            <ButtonGroup aria-label='btn group'>
               <Button color='inherit'>Rekisteröidy</Button>
               <Button color='inherit'>Kirjaudu</Button>
-            </Box>
+            </ButtonGroup>
           </Toolbar>
         </AppBar>
-      </div>
+      </Box>
     </nav>
   )
 }
