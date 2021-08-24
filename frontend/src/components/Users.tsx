@@ -99,7 +99,7 @@ const Users = () => {
             </TableHead>
             <TableBody>
               {users.map((user) => (
-                <TableRow key={user.name}>
+                <TableRow key={user.id}>
                   <TableCell component="th" scope="row">
                     {user.name}
                   </TableCell>
