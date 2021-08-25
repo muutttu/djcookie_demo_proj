@@ -1,9 +1,10 @@
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import { Switch, Route } from "react-router-dom";
+import { makeStyles } from '@material-ui/core/styles';
+import { Switch, Route } from 'react-router-dom';
 
-import Home from '../components/Home'
-import Users from '../components/Users';
+import Home from '../pages/Home';
+import Users from '../pages/Users';
 import NotFound404 from '../common/NotFound404';
+
 import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({

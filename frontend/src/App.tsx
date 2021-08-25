@@ -2,7 +2,7 @@ import { createTheme, ThemeProvider } from '@material-ui/core';
 
 import Header from './components/Header';
 import Navbar from './components/Navbar';
-import Main from './components/Main'
+import Main from './components/Main';
 import Footer from './components/Footer';
 
 
