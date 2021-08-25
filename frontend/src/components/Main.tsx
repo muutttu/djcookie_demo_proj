@@ -19,19 +19,19 @@ const Main = () => {
 
   return (
     <main>
-        <Container className={classes.page}>
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/users">
-              <Users />
-            </Route>
-            <Route path="*">
-              <NotFound404 />
-            </Route>
-          </Switch>
-        </Container>
+      <Container className={classes.page}>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
+          <Route path="/users">
+            <Users />
+          </Route>
+          <Route path="*">
+            <NotFound404 />
+          </Route>
+        </Switch>
+      </Container>
     </main>
   )
 }

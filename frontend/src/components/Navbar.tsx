@@ -6,6 +6,7 @@ import {
   Toolbar,
   Typography,
   Box,
+  Modal,
   Tabs,
   Tab,
   ButtonGroup,
@@ -29,6 +30,13 @@ const useStyles = makeStyles({
   },
   navLinks: {
     flexGrow: 1,
+  },
+  modal: {
+    position: 'absolute',
+    top: '25%',
+    left: '25%',
+    backgroundColor: '#fafafa',
+    border: '2px solid #000',
   }
 });
 
@@ -36,9 +44,28 @@ const Navbar = () => {
   const classes = useStyles();
   //const preventDefault = (event: React.SyntheticEvent) => event.preventDefault();
   const [value, setValue] = React.useState(0);
-  const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+  const handleTabChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
+  const [open, setOpen] = React.useState(false);
+
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setOpen(false);
+  };
+
+  const modalBody = (
+    <div className={classes.modal}>
+      <h2 id="simple-modal-title">Text in a modal</h2>
+      <p id="simple-modal-description">
+        Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+      </p>
+    </div>
+  );
+
 
   return (
     <nav>
@@ -51,18 +78,21 @@ const Navbar = () => {
             <Typography variant='h6'>
               Logo
             </Typography>
-            <Tabs centered value={value} onChange={handleChange} aria-label='simple tabs' className={classes.navLinks}>
+            <Tabs centered value={value} onChange={handleTabChange} aria-label='simple tabs' className={classes.navLinks}>
               <Tab label='Koti' component={RouterLink} to='/' {...tabProps(0)} />
               <Tab label='Käyttäjät' component={RouterLink} to='/users' {...tabProps(1)} />
               <Tab label='Alasivu 2' disabled component={RouterLink} to='#' {...tabProps(2)} />
             </Tabs>
             <ButtonGroup aria-label='btn group'>
               <Button color='inherit'>Rekisteröidy</Button>
-              <Button color='inherit'>Kirjaudu</Button>
+              <Button color='inherit' onClick={handleModalOpen}>Kirjaudu</Button>
             </ButtonGroup>
           </Toolbar>
         </AppBar>
       </Box>
+      <Modal open={open} onClose={handleModalClose}>
+        {modalBody}
+      </Modal>
     </nav>
   )
 }
