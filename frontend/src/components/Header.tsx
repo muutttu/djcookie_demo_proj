@@ -3,8 +3,8 @@ import { Box, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
   /* Page custom CSS here */
-  headerRoot: {
-    /* Header root element custom css here */
+  header: {
+    /* Header element custom css here */
   },
 });
 
@@ -13,8 +13,8 @@ const Header = () => {
 
   return (
     <header>
-      <Box display='flex' justifyContent='center' m={1} className={classes.headerRoot}>
-        <Typography variant='h3' component='h1' color='textSecondary'>
+      <Box m={1} className={classes.header}>
+        <Typography variant='h2' component='h1' align='center' color='textSecondary'>
           Sivuston otsikko
         </Typography>
       </Box>

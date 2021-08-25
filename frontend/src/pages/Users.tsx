@@ -1,40 +1,39 @@
 import { useState, useEffect } from 'react';
+import {
+  Container,
+  Box,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Typography,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Loader from '../components/Loader';
 import axios from 'axios';
-import { Box, Grid, Typography } from '@material-ui/core';
-import { makeStyles, createStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
 
-const useStyles = makeStyles(() => createStyles({
-  root: {
+const useStyles = makeStyles({
+  /* Page custom CSS here */
+  userspage: {
 
   },
-  maincontainer: {
-    justifyContent: 'center',
-  },
-  pageheader: {
+  title: {
 
   },
-  table: {
-
-  },
-  tabletitle: {
-
-  },
-}));
+  tableContainer: {
+    boxShadow: '5px 5px 10px black',
+  }
+});
 
 const Users = () => {
   const classes = useStyles();
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
-  const [usersLoaded, setUsersLoaded] = useState(false);
   // By default, TypeScript defines empty arrays as never[], thus a fix below:
   const [users, setUsers] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -54,6 +53,8 @@ const Users = () => {
         });
         //console.log(userdata.data);
         setUsers(userdata.data);
+        //Custom sleep event to see loader-spinner
+        await new Promise(resolve => setTimeout(resolve, 1000));
         setIsLoading(false);
 
       } catch (error) {
@@ -64,7 +65,6 @@ const Users = () => {
       }
 
       setIsLoading(false);
-      setUsersLoaded(true);
     };
 
     fetchData();
@@ -75,42 +75,48 @@ const Users = () => {
   }, []);
 
   return (
-    <Box className={classes.root}>
-      <Grid container className={classes.maincontainer}>
-        <Grid item className={classes.pageheader}>
-          <h2>Aktiiviset käyttäjät</h2>
-          {isError && <div>Jotain meni pieleen...</div>}
-        </Grid>
-        <TableContainer component={Paper}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell>
-                  <Typography variant='h6' className={classes.tabletitle}>
-                    Nimi
-                  </Typography>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography variant='h6' className={classes.tabletitle}>
-                    URL
-                  </Typography>
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {users.map((user) => (
-                <TableRow key={user.id}>
-                  <TableCell component="th" scope="row">
-                    {user.name}
+    <div className={classes.userspage}>
+      <Container maxWidth='sm'>
+        <Box m={2} className={classes.title}>
+          <Typography variant='h4' component='h2' align='center'>
+            Aktiiviset käyttäjät
+            {isError && <div>Jotain meni pieleen...</div>}
+          </Typography>
+        </Box>
+      </Container>
+      <Container maxWidth='md'>
+        {isLoading ? <Loader /> :
+          <TableContainer component={Paper} className={classes.tableContainer}>
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell align='center'>
+                    <Typography variant='h6' component='h3'>
+                      Nimi
+                    </Typography>
                   </TableCell>
-                  <TableCell align="right">{user.url}</TableCell>
+                  <TableCell align='center'>
+                    <Typography variant='h6' component='h3'>
+                      URL
+                    </Typography>
+                  </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </Grid>
-    </Box>
+              </TableHead>
+              <TableBody>
+                {users.map((user) => (
+                  <TableRow key={user.id}>
+                    <TableCell align='center' component="th" scope="row">
+                      {user.name}
+                    </TableCell>
+                    <TableCell align='center'>{user.url}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        }
+      </Container>
+    </div>
   )
 }
 

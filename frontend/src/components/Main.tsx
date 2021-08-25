@@ -9,8 +9,8 @@ import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
   /* Page custom CSS here */
-  mainRoot: {
-    /* Main root element custom css here */
+  page: {
+    /* Main page element custom css here */
   },
 });
 
@@ -19,7 +19,7 @@ const Main = () => {
 
   return (
     <main>
-        <Container className={classes.mainRoot}>
+        <Container className={classes.page}>
           <Switch>
             <Route exact path="/">
               <Home />
